@@ -1,5 +1,4 @@
 .DS_Store
-/zad2/
 *.o
 *.ali
 /zad3/__pycache__/
