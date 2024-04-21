@@ -1,3 +1,5 @@
+import math
+import numpy as np
 
 def leading_term(f):
     max_term = (0.0, 0)
@@ -17,12 +19,18 @@ def poly_multiply(f, g):
     return new_list
 
 def poly_subtract(f, g):
-    result = [0.0] * len(f)
+    if len(g) > len(f):
+        newf = [0.0] * len(g)
+        for i in range(len(f)):
+            newf[i] = f[i]
+    else:
+        newf = f
+    result = [0.0] * len(newf)
     indexes = []
-    for i in range(0, len(f)):
-        if f[i] != 0.0:
+    for i in range(0, len(newf)):
+        if newf[i] != 0.0:
             indexes.append(i)
-            result[i] = f[i] - g[i]
+            result[i] = newf[i] - g[i]
     # for rest g indexes apply
     for j in range(len(g)):
         if j not in indexes:
@@ -73,3 +81,41 @@ def gcd(f, g):
 def lcm(f, g):
     product = poly_multiply(f, g)
     return div_remainder(product, gcd(f, g))
+
+def extended_gcd(f, g):
+    if is_zero_polynomial(g) is True:
+        A = np.array([1])
+        B = np.array([0])
+        # A = [1.0] * len(f)
+        # B = [0.0] * len(f)
+        return f, A, B
+    q, r = div_remainder(f, g)
+    gcd, A1, B1 = extended_gcd(g, r)
+    A = B1
+    B = poly_subtract(A1, poly_multiply(q, B1))
+    return gcd, A, B
+
+    # def gcd_extended(a, b):
+    # if b == 0:
+    #     x = 1
+    #     y = 0
+    #     return a, x, y
+    # gcd, x1, y1 = gcd_extended(b, a % b)
+    # x = y1
+    # y = x1 - math.floor(a / b) * y1
+    # return gcd, x, y
+
+    # def solve_diofantic(a, b, c):
+    # if a == 0 and b == 0:
+    #     if c == 0:
+    #         return "Infinite solution exists", None
+    #     else:
+    #         return "No solution exists", None
+    # else:
+    #     gcd, x, y = gcd_extended(a, b)
+    #     if c % gcd != 0:
+    #         return "No solution exists", None
+    #     else:
+    #         result_x = int(x * (c / gcd))
+    #         result_y = int(y * (c / gcd))
+    #         return "One solution exists", (result_x, result_y)

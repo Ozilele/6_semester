@@ -53,15 +53,25 @@ def test_d():
     lcm_pol = format_polynomial(q)
     print(f'Solution to equation (1 + x^2) ∩ (1 + 2x + x^2) = (d) is d = {lcm_pol}')
 
+def test_extended_gcd(f, g):
+    f_pol = format_polynomial(f)
+    g_pol = format_polynomial(g)
+    gcd, A, B = pol.extended_gcd(f, g)
+    gcd_pol = format_polynomial(gcd)
+    print(f'GCD(f, g) = {gcd_pol}')
+    print(f'Wielomian A to {A}')
+    print(f'Wielomian B to {B}')
+
 def main():
-    # pol1_coefficients = input() # a0, a1, ..., an - first polynomial
-    # pol2_coefficients = input() # a0, a1, ..., an - second polynomial
-    # coefficients_pol1_list = [float(x) for x in pol1_coefficients.replace(" ", "").split(",")]
-    # coefficients_pol2_list = [float(x) for x in pol2_coefficients.replace(" ", "").split(",")]
+    pol1_coefficients = input() # a0, a1, ..., an - first polynomial
+    pol2_coefficients = input() # a0, a1, ..., an - second polynomial
+    coefficients_pol1_list = [float(x) for x in pol1_coefficients.replace(" ", "").split(",")]
+    coefficients_pol2_list = [float(x) for x in pol2_coefficients.replace(" ", "").split(",")]
     # test_div_remainder(coefficients_pol1_list, coefficients_pol2_list)
     # test_gcd(coefficients_pol1_list, coefficients_pol2_list)
     # test_lcm(coefficients_pol1_list, coefficients_pol2_list)
+    test_extended_gcd(coefficients_pol1_list, coefficients_pol2_list)
     # test_c()
-    test_d()
+    # test_d()
 
 main()

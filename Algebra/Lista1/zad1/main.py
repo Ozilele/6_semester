@@ -64,14 +64,14 @@ def format_input(x):
 
 # gcd - 6+2i, 15+5i; 18 - 1i, 11 + 7i
 def test():
-    # x = input()
-    # y = input()
-    # z = format_input(x)
-    # k = format_input(y)
-    # test_div_remainder(x, y, z, k)
-    # test_gcd(x, y, z, k)
-    # test_lcm(x, y, z, k)
-    calc_c()
+    x = input()
+    y = input()
+    z = format_input(x)
+    k = format_input(y)
+    test_div_remainder(x, y, z, k)
+    test_gcd(x, y, z, k)
+    test_lcm(x, y, z, k)
+    # calc_c()
     # calc_d()
 
 test()
