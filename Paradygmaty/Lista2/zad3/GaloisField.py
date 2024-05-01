@@ -1,10 +1,20 @@
 import math
+import isPrime as checker
 
 class GaloisField:
+
     def __init__(self, value, order):
+        try:
+            assert True == checker.isPrime(order), f'Order must be a prime number, currently it is {order}'
+        except AssertionError as msg: 
+            print(msg)
         self.value = value
         self.order = order
     def __str__(self):
+        try:
+            assert True == checker.isPrime(self.order)
+        except AssertionError:
+            return "error"
         return f"{self.value} in Galois Field {self.order}"
 
     # Assignment Operators
@@ -36,10 +46,10 @@ class GaloisField:
         other_inverse = ~other
         return self * other_inverse
     
-    def __neg__(self):
+    def __neg__(self): # unary -
         return GaloisField(self.order - self.value, self.order)
 
-    def __invert__(self):
+    def __invert__(self): # invert ^-1
         return GaloisField(self.solve_diofantic(self.value, self.order, 1), self.order)
     
     # Comparison operators
@@ -85,7 +95,7 @@ class GaloisField:
         return gcd, x, y
     
     def solve_diofantic(self, a, b, c):
-        gcd, x, y = self.gcd_extended(a, b)
+        _, x, _ = self.gcd_extended(a, b)
         if x < 0:
             return self.order + x
         else:

@@ -35,12 +35,16 @@ def testAssignmentOperators():
     return checkEQ(a, GaloisField(12, ORDER)) and checkEQ(d, GaloisField(2, ORDER)) and checkEQ(b, GaloisField(6, ORDER)) and checkEQ(c, GaloisField(617290, ORDER)) and checkEQ(e, GaloisField(6, ORDER))
 
 def main():
-    response = testArithmeticOperators() and testComparisonOperators() and testAssignmentOperators()
-    if response is True:
-        print("All the tests are passed.")
-    else:
-        print("Failed to pass all the tests.")
-    # res_next = testComparisonOperators()
-    # print(res_next)
+    # response = testArithmeticOperators() and testComparisonOperators() and testAssignmentOperators()
+    # if response is True:
+    #     print("All the tests are passed.")
+    # else:
+    #     print("Failed to pass all the tests.")
+    res_1 = testArithmeticOperators()
+    res_2 = testComparisonOperators()
+    res_3 = testAssignmentOperators()
+    print(f'Test arithmetic operators is {res_1}')
+    print(f'Test comparison operators is {res_2}')
+    print(f'Test assignment operators is {res_3}')
 
 main()

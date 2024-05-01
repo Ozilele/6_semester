@@ -8,6 +8,7 @@ using namespace std;
 template <int64_t P>
 class GaloisField {
     static_assert(is_prime_v<P>, "P must be a prime number");
+
     private: 
         int64_t value{};
         static auto gcdExtended(int a, int b, int *x, int *y) {
@@ -35,7 +36,7 @@ class GaloisField {
     public:
         constexpr static int order = P;
         constexpr GaloisField() = default;
-        constexpr GaloisField(int64_t value) : value(value % order) {}
+        constexpr GaloisField(uint64_t value) : value(value % order) {}
         // main idea is a performance improvement of programs by doing computations at compile time rather than run time
         // Assignments
         constexpr GaloisField& operator=(const GaloisField& other) {
@@ -122,7 +123,7 @@ class GaloisField {
             return outStream << l.value;
         }
 
-        constexpr int getCharacteristics() {
+        int getCharacteristics() {
             return this->value;
         }
 };

@@ -4,61 +4,75 @@ public class GaloisField {
     private int value;
     private int order;
 
-    public GaloisField(int value, int order) {
+    public GaloisField(int value, int order) throws Exception {
+        if(order <= 1) {
+            throw new Exception("Order is not a prime number");
+        }
+        for(int i = 2; i * i <= order; i++) {
+            if(order % i == 0) {
+                throw new Exception("Order is not a prime number");
+            }
+        }
+        if(value < 0) {
+            throw new Exception("Value is not a positive number");
+        }
         this.value = value;
         this.order = order;
     }
 
-    // Assignments
+    // Assignments =
     public GaloisField equals(GaloisField l) {
         this.value = l.value;
         return this;
-    }
-
+    }   
+    // +=
     public GaloisField plusEq(GaloisField l) {
         this.value = (this.value + l.value) % order;
         return this;
     }
-
-    public GaloisField minusEq(GaloisField l) {
+    // -=
+    public GaloisField minusEq(GaloisField l) throws Exception {
         GaloisField l_inverse = l.minus();
         return this.plusEq(l_inverse);
     }
-
+    // *=
     public GaloisField multplyEq(GaloisField l) {
         this.value = (this.value * l.value) % order;
         return this;
     }
-
-    public GaloisField divideEq(GaloisField l) {
+    // /=
+    public GaloisField divideEq(GaloisField l) throws Exception {
         GaloisField l_inverse = this.inverse(l);
         return this.multplyEq(l_inverse);
     }
 
     // Arithmetic operations
-    public GaloisField add(GaloisField l) {
+    // +
+    public GaloisField add(GaloisField l) throws Exception {
         return new GaloisField((l.value + this.value) % order, order);
     }
-
-    public GaloisField subtract(GaloisField l) {
+    // -
+    public GaloisField subtract(GaloisField l) throws Exception {
         GaloisField r_inverse = l.minus();
         return this.add(r_inverse);
     }
-
-    public GaloisField multiply(GaloisField l) {
+    // *
+    public GaloisField multiply(GaloisField l) throws Exception {
         return new GaloisField((l.value * this.value) % order, order);
     }
-
-    public GaloisField divide(GaloisField l) {
+    // /
+    public GaloisField divide(GaloisField l) throws Exception {
         GaloisField r_inverse = this.inverse(l);
         return this.multiply(r_inverse);
     }
 
-    public GaloisField minus() {
+    // unary -
+    public GaloisField minus() throws Exception {
         return new GaloisField(order - this.value, order);
     }
 
-    public GaloisField inverse(GaloisField l) {
+    // unary l^-1
+    public GaloisField inverse(GaloisField l) throws Exception {
         return new GaloisField(this.solveDiofantic(l.value, order, 1), order);
     }
 
@@ -88,27 +102,28 @@ public class GaloisField {
     }
 
     // Comparisions operators
-    boolean isEqual(GaloisField l) {
+    // ==
+    public boolean isEqual(GaloisField l) {
         return this.value == l.value;
     }
-
-    boolean notEqual(GaloisField l) {
+    // !=
+    public boolean notEqual(GaloisField l) {
         return this.value != l.value;
     }
-    
-    boolean isLessEq(GaloisField l) {
+    // <=
+    public boolean isLessEq(GaloisField l) {
         return this.value <= l.value;
     }
-
-    boolean isLess(GaloisField l) {
+    // <
+    public boolean isLess(GaloisField l) {
         return this.value < l.value;
     }
-
-    boolean isGreater(GaloisField l) {
+    // >
+    public boolean isGreater(GaloisField l) {
         return this.value > l.value;
     }
-
-    boolean isGreaterEq(GaloisField l) {
+    // >=
+    public boolean isGreaterEq(GaloisField l) {
         return this.value >= l.value;
     }
 
