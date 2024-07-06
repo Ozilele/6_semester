@@ -68,5 +68,9 @@ rysuj(N, L, Row) :-
 
 board(L) :-
     length(L, N),
-    rysuj(N, L, 12),
-    draw_row(L, 0, 12).
+    rysuj(N, L, N),
+    draw_row(L, 0, N).
+
+exec(Len) :-
+    hetmany(Len, X),
+    board(X).
