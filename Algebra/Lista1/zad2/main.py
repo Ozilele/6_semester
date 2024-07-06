@@ -67,6 +67,8 @@ def main():
     pol2_coefficients = input() # a0, a1, ..., an - second polynomial
     coefficients_pol1_list = [float(x) for x in pol1_coefficients.replace(" ", "").split(",")]
     coefficients_pol2_list = [float(x) for x in pol2_coefficients.replace(" ", "").split(",")]
+    print(coefficients_pol1_list)
+    print(coefficients_pol2_list)
     # test_div_remainder(coefficients_pol1_list, coefficients_pol2_list)
     # test_gcd(coefficients_pol1_list, coefficients_pol2_list)
     # test_lcm(coefficients_pol1_list, coefficients_pol2_list)
